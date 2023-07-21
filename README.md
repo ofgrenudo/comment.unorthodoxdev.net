@@ -7,6 +7,7 @@ I really love ari's blog. I think that Ari does what the web was supposed to do 
 One of the features of Ari's blog that I really like is the https://user.ari-web.xyz/ section. Its a comment board that anyone can post to anon or not. While i havent looked at what Ari's comment section was written in, im planning on writing this comment section in rust. My goal for now is to seperate the project into two secions
 
 **Binary**: comment.unorthodoxdev.net
+
 **Library**: cmanager (Comments Manager)
 
 The **Binary** will contain the code related to the web hooks and buisness logic.
@@ -14,6 +15,10 @@ The **Binary** will contain the code related to the web hooks and buisness logic
 The **Library** will contain the code that will store said comments into a JSON file or whatever database I decide to use (a JSON file).
 
 Below now, I will copy ari's rules, with abit of a twist.
+
+### Privacy
+
+Posting on the comment board, will automatically create and action that will store your ip in a sha256 sum and associate it, forever with your comment. If you do not want this, then do not comment.
 
 ### Rules
 

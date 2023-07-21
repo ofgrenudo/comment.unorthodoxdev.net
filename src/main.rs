@@ -1,5 +1,5 @@
 use cmanager;
 
 fn main() {
-    println!("using the cmanager library, 1 + 2 is {}", cmanager::add(1, 2).to_string());
+    println!("{:?}", cmanager::new("1.2.3.4".to_string(), "jwbro".to_string(), "this is awesome".to_string()));
 }

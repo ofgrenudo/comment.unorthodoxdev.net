@@ -1,13 +1,15 @@
+use std::vec;
+
 use uuid::Uuid;
-use sqlite;
+use sqlite::{self, State};
 
 #[derive(Debug)]
 pub struct Comment {
-    id: Uuid,
-    ip: String,
-    username: String,
-    comment: String,
-    visible: i32,
+    pub id: Uuid,
+    pub ip: String,
+    pub username: String,
+    pub comment: String,
+    pub visible: i64,
 }
 
 #[derive(Debug)]
@@ -16,7 +18,7 @@ pub struct CommentError {
     comment: Comment,
 }
 
-enum CommentResult<Comment, CommentError> {
+pub enum CommentResult<Comment, CommentError> {
     Ok(Comment),
     Err(CommentError),
 }
@@ -86,7 +88,9 @@ pub fn new(ip: String, username: String, comment: String) -> Result<Comment, Com
     
     let connection = sqlite::open("comments.db").unwrap();
 
-    let query = format!("INSERT INTO comments VALUES ('{}', '{}', '{}', '{}', {})", "abscsdf".to_string(), incoming_comment.ip, incoming_comment.username, incoming_comment.comment, incoming_comment.visible );
+    let query = format!("
+        CREATE TABLE IF NOT EXISTs comments (id TEXT NOT NULL PRIMARY KEY, ip TEXT, username TEXT NOT NULL, comment TEXT NOT NULL, visible INT NOT NULL);
+        INSERT INTO comments VALUES ('{}', '{}', '{}', '{}', {})", incoming_comment.id, incoming_comment.ip, incoming_comment.username, incoming_comment.comment, incoming_comment.visible );
 
     connection.execute(query).unwrap();
 
@@ -118,15 +122,24 @@ fn test_new_comment(){
     assert!(myComment.is_ok());        
 }
 
-// todo
-pub fn get() -> Comment {
-    let example_comment = Comment {
-        id: Uuid::new_v4(),
-        ip: "terst".to_string(),
-        username: "terst".to_string(),
-        comment: "terst".to_string(),
-        visible: 1,    
-    };
+pub fn get_all() -> Vec<Comment> {
+    let mut comments: Vec<Comment> = vec![];
+    let connection = sqlite::open("comments.db").unwrap();
+    let query = "SELECT * FROM comments;";
+    let mut statement = connection.prepare(query).unwrap(); // note this statement will break if I use anything other than a UUID as the primary key in ID. Ive spent hours troubleshooting this damn issue.
+    
+    while let Ok(State::Row) = statement.next() {
+        let temp_id = statement.read::<String, _>("id").unwrap();
+        let id: Uuid = Uuid::parse_str(&temp_id).unwrap();
 
-    return example_comment
+        comments.push(Comment {
+            id: id,
+            ip: statement.read::<String, _>("ip").unwrap().to_string(),
+            username: statement.read::<String, _>("username").unwrap().to_string(),
+            comment: statement.read::<String, _>("comment").unwrap().to_string(),
+            visible: statement.read::<i64, _>("visible").unwrap(),            
+        });
+    }
+
+    comments
 }

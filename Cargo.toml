@@ -8,4 +8,5 @@ name = "cmanager"
 path = "cmanager/src/lib.rs"
 
 [dependencies]
+sqlite = "0.31.0"
 uuid = {version = "1.4.1", features = ["v4"] }

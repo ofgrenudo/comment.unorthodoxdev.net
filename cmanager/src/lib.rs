@@ -1,4 +1,5 @@
 use uuid::Uuid;
+use sqlite;
 
 #[derive(Debug)]
 pub struct Comment {
@@ -6,7 +7,7 @@ pub struct Comment {
     ip: String,
     username: String,
     comment: String,
-    visible: bool,
+    visible: i32,
 }
 
 #[derive(Debug)]
@@ -21,14 +22,14 @@ enum CommentResult<Comment, CommentError> {
 }
 
 pub fn new(ip: String, username: String, comment: String) -> Result<Comment, CommentError> {
-    // Filter Comment String Lengths
+    // Filter comment string length
     if ip.len() > 500 {
         let problem_comment = Comment {
             id: Uuid::new_v4(),
             ip: "error".to_string(),
             username: username,
             comment: comment,
-            visible: false,        
+            visible: 0,        
         };
 
         let ip_too_long = CommentError {
@@ -45,7 +46,7 @@ pub fn new(ip: String, username: String, comment: String) -> Result<Comment, Com
             ip: ip,
             username: "error".to_string(),
             comment: comment,
-            visible: false,        
+            visible: 0,        
         };
 
         let username_too_long = CommentError {
@@ -62,7 +63,7 @@ pub fn new(ip: String, username: String, comment: String) -> Result<Comment, Com
             ip: ip,
             username: username,
             comment: "error".to_string(),
-            visible: false,        
+            visible: 0,        
         };
 
         let comment_too_long = CommentError {
@@ -73,14 +74,22 @@ pub fn new(ip: String, username: String, comment: String) -> Result<Comment, Com
         return Err(comment_too_long);
     }
 
+
+    // Everything looks good, lets move forward with commiting the information to the database.
     let incoming_comment = Comment {
         id: Uuid::new_v4(),
         ip: ip,
         username: username,
         comment: comment,
-        visible: true,        
+        visible: 1,        
     };
     
+    let connection = sqlite::open("comments.db").unwrap();
+
+    let query = format!("INSERT INTO comments VALUES ('{}', '{}', '{}', '{}', {})", "abscsdf".to_string(), incoming_comment.ip, incoming_comment.username, incoming_comment.comment, incoming_comment.visible );
+
+    connection.execute(query).unwrap();
+
     // All looks good, lets return it.
     Ok(incoming_comment)
 }
@@ -116,7 +125,7 @@ pub fn get() -> Comment {
         ip: "terst".to_string(),
         username: "terst".to_string(),
         comment: "terst".to_string(),
-        visible: true,    
+        visible: 1,    
     };
 
     return example_comment

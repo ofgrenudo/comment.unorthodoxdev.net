@@ -57,8 +57,14 @@
             text-rendering: optimizeSpeed;
         }
 
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
         li {
-            margin: var(--comment-section-spacing);
+            margin: 
         }
 
         pre {
@@ -90,8 +96,20 @@
         }
 
         #comment {
-            margin-top: 3em;
-            margin-bottom: 3em;
+            background-color: var(--bg);
+            border: 2px solid #ccc;
+            color: white;
+            padding-bottom: 1em;
+            padding-left: 1em;
+            padding-right: 1em;
+            margin-bottom: 2em;
+            width: 100%;
+
+        }
+
+        #comment_timestamp {
+            padding-top: 2em;
+            font-style: italic;
         }
 
 
@@ -135,16 +153,6 @@
             border-radius: 4px;
             resize: none;
             margin: 4px 2px;
-
-            /* background-color: var(--bg);
-            border: 2px solid #ccc;
-            color: white;
-            padding: 12px 20px;
-            cursor: pointer;
-            width: 100%;
-            box-sizing: border-box;
-            border-radius: 4px;
-            resize: none; */
         }
 
     </style>
@@ -152,12 +160,13 @@
 <body>
     <div class="input-section">
         <h2>Submit Your Comment</h2>
-        <form action="/new_comment" method="post" id="new_comment">
-            <input type="text" name="username-input" id="username" placeholder="whats your name anon?">
+        <form action="/new" method="post" id="new_comment">
+            <input type="text" name="username" id="username" placeholder="whats your name anon?">
             <textarea
-                id="comment-input"
+                id="comment"
+                name="comment"
                 maxlength="1024"
-                placeholder="what do you have to say to me..."
+                placeholder="whats on your mind anon...."
                 spellcheck="true"
             ></textarea>
             <button id="submit">Send!</button>
@@ -171,8 +180,9 @@
                 {% if comment.visible == 1 %}
                     <li id="comment_id" hidden>{{comment.id}}</li>
                     <li id="comment_ip" hidden>{{comment.ip}}</li>
-                    <li id="comment_username"><h4>anon {{comment.username}} says...</h4></li>
-                    <li id="comment_input">{{comment.comment}}</li>    
+                    <li id="comment_username"><p>anon <b>{{comment.username}}</b> says...</p></li>
+                    <li id="comment_input">{{comment.comment}}</li>   
+                    <li id="comment_timestamp">timestamp</li> 
                 {% endif %}
             </div>
             {% endfor %}

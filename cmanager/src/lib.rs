@@ -1,7 +1,9 @@
 use std::vec;
 
+use actix_web::web::Query;
 use uuid::Uuid;
 use sqlite::{self, State};
+use chrono::prelude::*;
 
 #[derive(Debug)]
 pub struct Comment {
@@ -9,6 +11,7 @@ pub struct Comment {
     pub ip: String,
     pub username: String,
     pub comment: String,
+    pub timestamp: String,
     pub visible: i64,
 }
 
@@ -31,6 +34,7 @@ pub fn new(ip: String, username: String, comment: String) -> Result<Comment, Com
             ip: "error".to_string(),
             username: username,
             comment: comment,
+            timestamp: Utc::now().to_string(),
             visible: 0,        
         };
 
@@ -48,6 +52,7 @@ pub fn new(ip: String, username: String, comment: String) -> Result<Comment, Com
             ip: ip,
             username: "error".to_string(),
             comment: comment,
+            timestamp: Utc::now().to_string(),
             visible: 0,        
         };
 
@@ -65,6 +70,7 @@ pub fn new(ip: String, username: String, comment: String) -> Result<Comment, Com
             ip: ip,
             username: username,
             comment: "error".to_string(),
+            timestamp: Utc::now().to_string(),
             visible: 0,        
         };
 
@@ -83,14 +89,15 @@ pub fn new(ip: String, username: String, comment: String) -> Result<Comment, Com
         ip: ip,
         username: username,
         comment: comment,
+        timestamp: Utc::now().to_string(),
         visible: 1,        
     };
     
     let connection = sqlite::open("comments.db").unwrap();
 
     let query = format!("
-        CREATE TABLE IF NOT EXISTs comments (id TEXT NOT NULL PRIMARY KEY, ip TEXT, username TEXT NOT NULL, comment TEXT NOT NULL, visible INT NOT NULL);
-        INSERT INTO comments VALUES ('{}', '{}', '{}', '{}', {})", incoming_comment.id, incoming_comment.ip, incoming_comment.username, incoming_comment.comment, incoming_comment.visible );
+        CREATE TABLE IF NOT EXISTs comments (id TEXT NOT NULL PRIMARY KEY, ip TEXT, username TEXT NOT NULL, comment TEXT NOT NULL, timestamp TEXT, visible INT NOT NULL);
+        INSERT INTO comments VALUES ('{}', '{}', '{}', '{}', '{}', {})", incoming_comment.id, incoming_comment.ip, incoming_comment.username, incoming_comment.comment, incoming_comment.timestamp, incoming_comment.visible );
 
     connection.execute(query).unwrap();
 
@@ -125,9 +132,14 @@ fn test_new_comment(){
 pub fn get_all() -> Vec<Comment> {
     let mut comments: Vec<Comment> = vec![];
     let connection = sqlite::open("comments.db").unwrap();
-    let query = "SELECT * FROM comments;";
-    let mut statement = connection.prepare(query).unwrap(); // note this statement will break if I use anything other than a UUID as the primary key in ID. Ive spent hours troubleshooting this damn issue.
     
+    // Note we had to split up the blow two statements. For some reason, the statement.next() function later down the program would not pull comments when we ran the CREATE TABLE command.
+    // Maybe its because I didnt do the format!() like i did in the new comment function???
+    // The compiler is angry here, i know. Ill fix it all later, but for now it looks aesthetically pleasing uwu.
+    
+    let mut query = "SELECT * FROM comments ORDER BY timestamp DESC LIMIT 50;";
+    let mut statement = connection.prepare(query).unwrap();
+
     while let Ok(State::Row) = statement.next() {
         let temp_id = statement.read::<String, _>("id").unwrap();
         let id: Uuid = Uuid::parse_str(&temp_id).unwrap();
@@ -137,6 +149,7 @@ pub fn get_all() -> Vec<Comment> {
             ip: statement.read::<String, _>("ip").unwrap().to_string(),
             username: statement.read::<String, _>("username").unwrap().to_string(),
             comment: statement.read::<String, _>("comment").unwrap().to_string(),
+            timestamp: statement.read::<String, _>("timestamp").unwrap(),
             visible: statement.read::<i64, _>("visible").unwrap(),            
         });
     }

@@ -63,10 +63,6 @@
             padding: 0;
         }
 
-        li {
-            margin: 
-        }
-
         pre {
             white-space: pre-wrap;
             margin: 0;
@@ -161,13 +157,14 @@
     <div class="input-section">
         <h2>Submit Your Comment</h2>
         <form action="/new" method="post" id="new_comment">
-            <input type="text" name="username" id="username" placeholder="whats your name anon?">
+            <input type="text" name="username" id="username" placeholder="whats your name anon?" required>
             <textarea
                 id="comment"
                 name="comment"
                 maxlength="1024"
                 placeholder="whats on your mind anon...."
                 spellcheck="true"
+                required
             ></textarea>
             <button id="submit">Send!</button>
         </form>
@@ -182,7 +179,7 @@
                     <li id="comment_ip" hidden>{{comment.ip}}</li>
                     <li id="comment_username"><p>anon <b>{{comment.username}}</b> says...</p></li>
                     <li id="comment_input">{{comment.comment}}</li>   
-                    <li id="comment_timestamp">timestamp</li> 
+                    <li id="comment_timestamp">{{comment.timestamp}}</li> 
                 {% endif %}
             </div>
             {% endfor %}

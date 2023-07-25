@@ -18,7 +18,7 @@ struct FormData {
 }
 
 async fn new(web::Form(form): web::Form<FormData>, req: HttpRequest) -> impl Responder {
-    let ip = req.peer_addr().unwrap_or(SocketAddr::new(IpAddr::V4(Ipv4Addr::new(6, 6, 6, 6)), 666));
+    let ip = req.peer_addr().unwrap_or(SocketAddr::new(IpAddr::V4(Ipv4Addr::new(6, 6, 6, 6)), 666)).ip();
     let username = form.username;
     let comment = form.comment;
 

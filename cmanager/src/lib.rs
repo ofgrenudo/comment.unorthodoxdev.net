@@ -4,6 +4,7 @@ use actix_web::web::Query;
 use uuid::Uuid;
 use sqlite::{self, State};
 use chrono::prelude::*;
+use sha256::digest;
 
 #[derive(Debug)]
 pub struct Comment {
@@ -27,6 +28,8 @@ pub enum CommentResult<Comment, CommentError> {
 }
 
 pub fn new(ip: String, username: String, comment: String) -> Result<Comment, CommentError> {
+    let sha_ip = digest(&ip.replace(":", ""));
+
     // Filter comment string length
     if ip.len() > 500 {
         let problem_comment = Comment {
@@ -49,7 +52,7 @@ pub fn new(ip: String, username: String, comment: String) -> Result<Comment, Com
     if username.len() > 500 { 
         let problem_comment = Comment {
             id: Uuid::new_v4(),
-            ip: ip,
+            ip: sha_ip.to_string(),
             username: "error".to_string(),
             comment: comment,
             timestamp: Utc::now().to_string(),
@@ -67,7 +70,7 @@ pub fn new(ip: String, username: String, comment: String) -> Result<Comment, Com
     if comment.len() > 10000 {
         let problem_comment = Comment {
             id: Uuid::new_v4(),
-            ip: ip,
+            ip: sha_ip.to_string(),
             username: username,
             comment: "error".to_string(),
             timestamp: Utc::now().to_string(),
@@ -86,7 +89,7 @@ pub fn new(ip: String, username: String, comment: String) -> Result<Comment, Com
     // Everything looks good, lets move forward with commiting the information to the database.
     let incoming_comment = Comment {
         id: Uuid::new_v4(),
-        ip: ip,
+        ip: sha_ip.to_string(),
         username: username,
         comment: comment,
         timestamp: Utc::now().to_string(),

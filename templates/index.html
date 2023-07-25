@@ -8,6 +8,16 @@
 </head>
 <body>
     <div>
+        <!-- ip: String, username: String, comment: String -->
+        <form action="/new_comment" method="post" id="new_comment">
+            <label for="username">Username:</label>
+            <input type="text" name="username">
+            <label for="comment">Comment:</label>
+            <input type="text" name="comment">
+            <input type="submit" value="Send Request" />            
+        </form>
+    </div>
+    <div>
         {% for comment in comments %}
             {% if comment.visible == 1 %}
             <ul>

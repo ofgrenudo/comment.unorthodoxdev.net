@@ -1,3 +1,4 @@
 /target
 ./cmanager/target
 *.lock
+comments.db

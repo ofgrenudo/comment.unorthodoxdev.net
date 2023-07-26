@@ -1,7 +1,7 @@
 use std::net::{Ipv4Addr, SocketAddr, IpAddr};
-use actix_web::{get, post, web::{self, Form}, App, HttpResponse, HttpServer, Responder, HttpRequest};
+use actix_web::{web, App, HttpServer, Responder, HttpRequest};
 use askama::Template; // bring trait in scope
-use cmanager::{self, Comment};
+use cmanager;
 use serde::Deserialize;
 
 #[derive(Template)] // this will generate the code...

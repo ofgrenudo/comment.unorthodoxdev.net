@@ -1,7 +1,4 @@
-use std::vec;
-
 use uuid::Uuid;
-use sqlite::{self, State};
 pub mod new;
 pub mod get;
 
@@ -30,6 +27,7 @@ pub struct Comment {
 }
 
 #[derive(Debug)]
+#[allow(dead_code)]
 pub struct CommentError {
     error: String,
     comment: Comment,

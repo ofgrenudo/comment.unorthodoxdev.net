@@ -5,7 +5,22 @@ use uuid::Uuid;
 use sqlite::{self, State};
 use chrono::prelude::*;
 use sha256::digest;
+pub mod new;
 
+/// # Comment
+/// 
+/// Comment is the data type that we store in our sqlite3 database. It consists of the following
+/// 
+/// - id
+/// - ip
+/// - username
+/// - comment
+/// - timestamp
+/// - visible
+/// 
+/// The ID and Timestamp are automatically generated. The ID is generated using a UUID V3 format (essentially completly random). The timestamp is in UTC time, cuz we are cool
+/// The username, and comment and IP are user supplied. Typically though, the IP is sourced from the Actix Web Server.
+///  
 #[derive(Debug)]
 pub struct Comment {
     pub id: Uuid,
@@ -27,109 +42,11 @@ pub enum CommentResult<Comment, CommentError> {
     Err(CommentError),
 }
 
+/// Depreciated, please use cmanager::new::comment;
+/// 
+/// Takes 3 inputs, IP (String), Username (String), and Comment (String). It will return to you a Result, Ok(Comment) or Err(CommentError).
 pub fn new(ip: String, username: String, comment: String) -> Result<Comment, CommentError> {
-    let sha_ip = digest(&ip.replace(":", ""));
-
-    // Filter comment string length
-    if ip.len() > 500 {
-        let problem_comment = Comment {
-            id: Uuid::new_v4(),
-            ip: "error".to_string(),
-            username: username,
-            comment: comment,
-            timestamp: Utc::now().to_string(),
-            visible: 0,        
-        };
-
-        let ip_too_long = CommentError {
-            error: "Error, your ip address was over 500 characters, this attempt has been logged, and will be reviewed later. Pleas try again :)".to_string(),
-            comment: problem_comment,
-        };
-
-        return Err(ip_too_long);
-    }
-
-    if username.len() > 500 { 
-        let problem_comment = Comment {
-            id: Uuid::new_v4(),
-            ip: sha_ip.to_string(),
-            username: "error".to_string(),
-            comment: comment,
-            timestamp: Utc::now().to_string(),
-            visible: 0,        
-        };
-
-        let username_too_long = CommentError {
-            error: "Error, your user name was over 500 characters, this attempt has been logged, and will be reviewed later. Pleas try again :)".to_string(),
-            comment: problem_comment,
-        };
-
-        return Err(username_too_long);
-    }
-
-    if comment.len() > 10000 {
-        let problem_comment = Comment {
-            id: Uuid::new_v4(),
-            ip: sha_ip.to_string(),
-            username: username,
-            comment: "error".to_string(),
-            timestamp: Utc::now().to_string(),
-            visible: 0,        
-        };
-
-        let comment_too_long = CommentError {
-            error: "Error, your comment was over 10,000 characters, this attempt has been logged, and will be reviewed later. Pleas try again :)".to_string(),
-            comment: problem_comment
-        };
-
-        return Err(comment_too_long);
-    }
-
-
-    // Everything looks good, lets move forward with commiting the information to the database.
-    let incoming_comment = Comment {
-        id: Uuid::new_v4(),
-        ip: sha_ip.to_string(),
-        username: username,
-        comment: comment,
-        timestamp: Utc::now().to_string(),
-        visible: 1,        
-    };
-    
-    let connection = sqlite::open("comments.db").unwrap();
-
-    let query = format!("
-        CREATE TABLE IF NOT EXISTs comments (id TEXT NOT NULL PRIMARY KEY, ip TEXT, username TEXT NOT NULL, comment TEXT NOT NULL, timestamp TEXT, visible INT NOT NULL);
-        INSERT INTO comments VALUES ('{}', '{}', '{}', '{}', '{}', {})", incoming_comment.id, incoming_comment.ip, incoming_comment.username, incoming_comment.comment, incoming_comment.timestamp, incoming_comment.visible );
-
-    connection.execute(query).unwrap();
-
-    // All looks good, lets return it.
-    Ok(incoming_comment)
-}
-
-#[test]
-fn test_new_ip_limit(){
-    let myComment = new("1.2.3.4".to_string().repeat(5000), "uname".to_string(), "test".to_string());
-    assert!(myComment.is_err());
-}
-
-#[test]
-fn test_new_username_limit(){
-    let myComment = new("1.2.3.4".to_string(), "uname".to_string().repeat(5000), "test".to_string());
-    assert!(myComment.is_err());    
-}
-
-#[test]
-fn test_new_comment_limit(){
-    let myComment = new("1.2.3.4".to_string(), "uname".to_string(), "test".to_string().repeat(5000));
-    assert!(myComment.is_err());    
-}
-
-#[test]
-fn test_new_comment(){
-    let myComment = new("1.2.3.4".to_string(), "uname".to_string(), "test".to_string());
-    assert!(myComment.is_ok());        
+    new::comment(ip, username, comment) // Look at that sexy refactoring, where I keep the origional API alive :) 
 }
 
 pub fn get_all() -> Vec<Comment> {

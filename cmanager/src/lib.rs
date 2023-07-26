@@ -1,10 +1,7 @@
 use std::vec;
 
-use actix_web::web::Query;
 use uuid::Uuid;
 use sqlite::{self, State};
-use chrono::prelude::*;
-use sha256::digest;
 pub mod new;
 
 /// # Comment
@@ -49,6 +46,9 @@ pub fn new(ip: String, username: String, comment: String) -> Result<Comment, Com
     new::comment(ip, username, comment) // Look at that sexy refactoring, where I keep the origional API alive :) 
 }
 
+/// Soon to be Depreciated.
+/// 
+/// This function will return all contents up to 50 rows (not really all, which is why we are migrating to a new api endpoint). 
 pub fn get_all() -> Vec<Comment> {
     let mut comments: Vec<Comment> = vec![];
     let connection = sqlite::open("comments.db").unwrap();
@@ -57,7 +57,7 @@ pub fn get_all() -> Vec<Comment> {
     // Maybe its because I didnt do the format!() like i did in the new comment function???
     // The compiler is angry here, i know. Ill fix it all later, but for now it looks aesthetically pleasing uwu.
     
-    let mut query = "SELECT * FROM comments ORDER BY timestamp DESC LIMIT 50;";
+    let query = "SELECT * FROM comments ORDER BY timestamp DESC LIMIT 50;";
     let mut statement = connection.prepare(query).unwrap();
 
     while let Ok(State::Row) = statement.next() {

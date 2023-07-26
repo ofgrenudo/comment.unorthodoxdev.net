@@ -35,7 +35,7 @@ async fn main() -> std::io::Result<()> {
             .service(web::resource("/").to(|| async { CommentTemplate {comments: cmanager::get_all()}}))
             .route("/new", web::post().to(new))
     })
-    .bind(("127.0.0.1", 8080))?
+    .bind(("0.0.0.0", 8080))?
     .run()
     .await
 }

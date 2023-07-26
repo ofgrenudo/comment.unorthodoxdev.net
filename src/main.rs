@@ -25,14 +25,14 @@ async fn new(web::Form(form): web::Form<FormData>, req: HttpRequest) -> impl Res
     let _ = cmanager::new(ip.to_string(), username, comment);
 
     // CommentTemplate {comments: cmanager::get_all()}
-    web::redirect("/comment/new", "/")
+    web::redirect("/comment/new", "/comment/")
 }
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
     HttpServer::new(|| {
         App::new()
-            .service(web::resource("/").to(|| async { CommentTemplate {comments: cmanager::get_all()}}))
+            .service(web::resource("/comment/").to(|| async { CommentTemplate {comments: cmanager::get_all()}}))
             .route("/comment/new", web::post().to(new))
     })
     .bind(("0.0.0.0", 8080))?

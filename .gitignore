@@ -2,3 +2,4 @@
 ./cmanager/target
 *.lock
 comments.db
+log/*.log

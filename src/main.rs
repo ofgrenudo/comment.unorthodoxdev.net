@@ -1,8 +1,10 @@
 use std::net::{Ipv4Addr, SocketAddr, IpAddr};
-use actix_web::{web, App, HttpServer, Responder, HttpRequest};
+use actix_web::{web::{self, trace}, App, HttpServer, Responder, HttpRequest};
 use askama::Template; // bring trait in scope
 use cmanager;
 use serde::Deserialize;
+use log4rs;
+use log::*;
 
 #[derive(Template)] // this will generate the code...
 #[template(path = "index.html")] 
@@ -22,14 +24,19 @@ async fn new(web::Form(form): web::Form<FormData>, req: HttpRequest) -> impl Res
     let username = form.username;
     let comment = form.comment;
 
-    let _ = cmanager::new(ip.to_string(), username, comment);
+    debug!("Recieved create new comment request from: {} with username: {}, and comment: {}", ip, username, comment);
+    let new_comment_result = cmanager::new(ip.to_string(), username, comment);
+    debug!("Submitted new comment {:?}", new_comment_result);
 
-    // CommentTemplate {comments: cmanager::get_all()}
+    debug!("Redirecting to the root /comment/");
     web::redirect("/comment/new", "/comment/")
 }
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
+    log4rs::init_file("log_config.yaml", Default::default()).unwrap();
+
+    debug!("running now on https://0.0.0.0:8080/comment/");
     HttpServer::new(|| {
         App::new()
             .service(web::resource("/comment/").to(|| async { CommentTemplate {comments: cmanager::get_all()}}))

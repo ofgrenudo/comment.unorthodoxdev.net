@@ -40,6 +40,7 @@ async fn main() -> std::io::Result<()> {
     log4rs::init_file("log_config.yaml", Default::default()).unwrap();
 
     debug!("running now on https://0.0.0.0:8080/comment/");
+    println!("Hello World!");
     HttpServer::new(|| {
         App::new()
             .service(web::resource("/comment/").to(|| async { 

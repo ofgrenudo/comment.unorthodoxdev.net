@@ -66,12 +66,12 @@ pub fn get_latest() -> Vec<Comment> {
 pub fn get_one_by_id(id: String) -> Vec<Comment> {
     let mut comments: Vec<Comment> = vec![];
     let connection = sqlite::open("comments.db").unwrap();
-    
+    let filtered_id = id.replace(&['(', ')', ',', '\"', '.', ';', ':', '\''][..], "");
     // Note we had to split up the blow two statements. For some reason, the statement.next() function later down the program would not pull comments when we ran the CREATE TABLE command.
     // Maybe its because I didnt do the format!() like i did in the new comment function???
     // The compiler is angry here, i know. Ill fix it all later, but for now it looks aesthetically pleasing uwu.
     
-    let query = format!("SELECT FROM comments WHERE id = '{}'", id);
+    let query = format!("SELECT * FROM comments WHERE id = '{}'", &filtered_id);
     let mut statement = connection.prepare(query).unwrap();
 
     while let Ok(State::Row) = statement.next() {
@@ -96,12 +96,13 @@ pub fn get_one_by_id(id: String) -> Vec<Comment> {
 pub fn get_all_by_ip(ip: String) -> Vec<Comment> {
     let mut comments: Vec<Comment> = vec![];
     let connection = sqlite::open("comments.db").unwrap();
+    let filtered_ip = ip.replace(&['(', ')', ',', '\"', '.', ';', ':', '\''][..], "");
     
     // Note we had to split up the blow two statements. For some reason, the statement.next() function later down the program would not pull comments when we ran the CREATE TABLE command.
     // Maybe its because I didnt do the format!() like i did in the new comment function???
     // The compiler is angry here, i know. Ill fix it all later, but for now it looks aesthetically pleasing uwu.
     
-    let query = format!("SELECT FROM comments WHERE ip = '{}'", digest(&ip.replace(":", "")));
+    let query = format!("SELECT * FROM comments WHERE ip = '{}'", digest(filtered_ip));
     let mut statement = connection.prepare(query).unwrap();
 
     while let Ok(State::Row) = statement.next() {
@@ -125,12 +126,14 @@ pub fn get_all_by_ip(ip: String) -> Vec<Comment> {
 pub fn get_all_by_username(username: String) -> Vec<Comment> {
     let mut comments: Vec<Comment> = vec![];
     let connection = sqlite::open("comments.db").unwrap();
+    let filtered_username = username.replace(&['(', ')', ',', '\"', '.', ';', ':', '\''][..], "");
+
     
     // Note we had to split up the blow two statements. For some reason, the statement.next() function later down the program would not pull comments when we ran the CREATE TABLE command.
     // Maybe its because I didnt do the format!() like i did in the new comment function???
     // The compiler is angry here, i know. Ill fix it all later, but for now it looks aesthetically pleasing uwu.
     
-    let query = format!("SELECT FROM comments WHERE username = '{}'", username);
+    let query = format!("SELECT * FROM comments WHERE username = '{}'", filtered_username);
     let mut statement = connection.prepare(query).unwrap();
 
     while let Ok(State::Row) = statement.next() {

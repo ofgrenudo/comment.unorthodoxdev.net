@@ -19,7 +19,7 @@ pub async fn comment(web::Form(form): web::Form<FormData>, req: HttpRequest) -> 
     let comment = form.comment;
 
     debug!("Recieved create new comment request from: {} with username: {}, and comment: {}", ip, username, comment);
-    let new_comment_result = cmanager::new(String::from(ip), username, comment);
+    let new_comment_result = cmanager::new::comment(String::from(ip), username, comment);
     debug!("Submitted new comment {:?}", new_comment_result);
 
     debug!("Redirecting to the root /comment/get/latest");

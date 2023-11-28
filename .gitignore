@@ -1,5 +1,5 @@
 /target
-./cmanager/target
+cmanager/target
 *.lock
 comments.db
 backup/*.db

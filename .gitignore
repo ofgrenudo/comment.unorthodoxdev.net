@@ -1,6 +1,6 @@
 /target
 cmanager/target
 *.lock
-comments.db
+./comments.db
 backup/*.db
 log/*.log

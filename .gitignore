@@ -2,5 +2,5 @@
 ./cmanager/target
 *.lock
 comments.db
-./backup/*.db
+backup/*.db
 log/*.log

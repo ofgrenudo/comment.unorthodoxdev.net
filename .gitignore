@@ -4,3 +4,6 @@ cmanager/target
 ./comments.db
 backup/*.db
 log/*.log
+
+.env
+database/comments.sql

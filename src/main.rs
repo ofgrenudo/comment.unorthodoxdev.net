@@ -1,31 +1,45 @@
-use std::path::Path;
-
-use actix_web::{App, HttpServer};
+use diesel::SqliteConnection;
+use log::{error, info, warn, trace};
+use diesel::Connection;
 use log4rs;
-use log::*;
+use clap::Parser;
+use dotenv::dotenv;
+use std::env;
 
-mod new;
-mod get;
+// Import Modules
+mod api;
 
-#[actix_web::main]
-async fn main() -> std::io::Result<()> {
-    log4rs::init_file("log_config.yaml", Default::default()).unwrap();
+#[derive(Parser, Debug)]
+#[command(name = "comments.unorthodoxdev.net")]
+#[command(version = "0.1")]
+#[command(about="This application is what manages the comments on unorthodoxdev.net!")]
+#[command(version, about, long_about = None)]
+struct Args {
+}
 
-    info!("running now on https://0.0.0.0:8080/comment/");
-    HttpServer::new(|| {
-        App::new()
-        .service(get::default)
-        .service(get::latest)
-        .service(get::all)
-        .service(get::by_id)
-        .service(get::by_username)
-        .service(new::comment)
-        .service(actix_files::Files::new(
-            "/comment/static/",
-            Path::new(&format!("./static")),
-        ))
-    })
-    .bind(("0.0.0.0", 8080))?
-    .run()
-    .await
+pub fn establish_connection() -> SqliteConnection {
+    dotenv().ok();
+
+    let database_url = env::var("DATABASE_URL").expect("DATABASE_URL must be set");
+    SqliteConnection::establish(&database_url)
+        .unwrap_or_else(|_| panic!("Error connecting to {}", database_url))
+}
+
+fn main() {
+    //Configure log4rs
+    log4rs::init_file("configurations/log4rs.yaml", Default::default()).unwrap();
+
+    trace!("[MAIN.rs] Initializing environment variables.");
+    dotenv().ok(); // load .env
+
+    info!("[MAIN.rs] Parsing runtime args.");
+    let cli = Args::parse();
+
+
+    // check if database exists.
+        // create if does not exists.
+
+    // check mode running in, default webserver mode
+        // if webserver mode start webserver.
+            // register routes.
 }

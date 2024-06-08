@@ -33,6 +33,7 @@ pub struct Comment {
 
 pub fn check_database() {
     let connection = sqlite::open(env::var("DATABASE_URL").unwrap()).unwrap();
+    debug!("[COMMENTS.rs] Checking that the table 'comments' exists.");
     let query = format!("SELECT 1 FROM comments;");
     let result = connection.execute(query).expect("\n\nERROR: No table 'comments', exists. Please run, `diesel migration run` to generate a new comments table.\n\n");
 }

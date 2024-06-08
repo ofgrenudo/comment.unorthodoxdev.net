@@ -69,3 +69,155 @@
 2024-06-08 02:55:06 - INFO: [MAIN.rs] Parsing runtime args.
 2024-06-08 02:55:06 - INFO: [MAIN.rs] Connecting to the database at sqlite://database/comments.sql
 2024-06-08 02:55:06 - DEBUG: ()
+2024-06-08 02:59:55 - INFO: [MAIN.rs] Parsing runtime args.
+2024-06-08 02:59:55 - INFO: [MAIN.rs] Connecting to the database at sqlite://database/comments.sql
+2024-06-08 03:02:31 - INFO: [MAIN.rs] Parsing runtime args.
+2024-06-08 03:02:31 - INFO: [MAIN.rs] Connecting to the database at sqlite://database/comments.sql
+2024-06-08 03:03:20 - INFO: [MAIN.rs] Parsing runtime args.
+2024-06-08 03:03:20 - INFO: [MAIN.rs] Connecting to the database at sqlite://database/comments.sql
+2024-06-08 03:03:20 - DEBUG: Checking that the table comments exists.
+2024-06-08 03:03:47 - INFO: [MAIN.rs] Parsing runtime args.
+2024-06-08 03:03:47 - INFO: [MAIN.rs] Connecting to the database at sqlite://database/comments.sql
+2024-06-08 03:03:47 - DEBUG: [COMMENTS.rs] Checking that the table 'comments' exists.
+2024-06-08 03:07:06 - INFO: [MAIN.rs] Parsing runtime args.
+2024-06-08 03:07:06 - INFO: [MAIN.rs] Connecting to the database at sqlite://database/comments.sql
+2024-06-08 03:07:06 - DEBUG: [COMMENTS.rs] Checking that the table 'comments' exists.
+2024-06-08 03:07:06 - DEBUG: [CREATE.rs] Receiving new comment.
+2024-06-08 03:07:06 - DEBUG: [CREATE.rs] Creating a new uuid for the comment.
+2024-06-08 03:07:06 - DEBUG: [CREATE.rs] Creating a new time stamp for the comment.
+2024-06-08 03:07:06 - DEBUG: [CREATE.rs] Sanitizing comment.
+2024-06-08 03:07:06 - DEBUG: [CREATE.rs] Inserting comment.
+2024-06-08 03:07:06 - INFO: [CREATE.rs] Inserting a new comment.
+2024-06-08 03:08:00 - INFO: [MAIN.rs] Parsing runtime args.
+2024-06-08 03:08:00 - INFO: [MAIN.rs] Connecting to the database at sqlite://database/comments.sql
+2024-06-08 03:08:00 - DEBUG: [COMMENTS.rs] Checking that the table 'comments' exists.
+2024-06-08 03:08:00 - DEBUG: [CREATE.rs] Receiving new comment.
+2024-06-08 03:08:00 - DEBUG: [CREATE.rs] Creating a new uuid for the comment.
+2024-06-08 03:08:00 - DEBUG: [CREATE.rs] Creating a new time stamp for the comment.
+2024-06-08 03:08:00 - DEBUG: [CREATE.rs] Sanitizing comment.
+2024-06-08 03:08:00 - DEBUG: [CREATE.rs] Inserting comment.
+2024-06-08 03:08:00 - INFO: [CREATE.rs] Inserting a new comment.
+2024-06-08 03:08:00 - DEBUG: ()
+2024-06-08 03:23:03 - INFO: [MAIN.rs] Parsing runtime args.
+2024-06-08 03:23:03 - INFO: [MAIN.rs] Connecting to the database at sqlite://database/comments.sql
+2024-06-08 03:23:03 - DEBUG: [COMMENTS.rs] Checking that the table 'comments' exists.
+2024-06-08 03:23:03 - DEBUG: [CREATE.rs] Receiving new comment.
+2024-06-08 03:23:03 - DEBUG: [CREATE.rs] Creating a new uuid for the comment.
+2024-06-08 03:23:03 - DEBUG: [CREATE.rs] Creating a new time stamp for the comment.
+2024-06-08 03:23:03 - DEBUG: [CREATE.rs] Sanitizing comment.
+2024-06-08 03:23:03 - DEBUG: [CREATE.rs] Inserting comment.
+2024-06-08 03:23:03 - INFO: [CREATE.rs] Inserting a new comment.
+2024-06-08 03:23:03 - DEBUG: ()
+2024-06-08 03:24:18 - INFO: [MAIN.rs] Parsing runtime args.
+2024-06-08 03:24:18 - INFO: [MAIN.rs] Connecting to the database at sqlite://database/comments.sql
+2024-06-08 03:24:18 - DEBUG: [COMMENTS.rs] Checking that the table 'comments' exists.
+2024-06-08 03:24:18 - DEBUG: [CREATE.rs] Receiving new comment.
+2024-06-08 03:24:18 - DEBUG: [CREATE.rs] Creating a new uuid for the comment.
+2024-06-08 03:24:18 - DEBUG: [CREATE.rs] Creating a new time stamp for the comment.
+2024-06-08 03:24:18 - DEBUG: [CREATE.rs] Sanitizing comment.
+2024-06-08 03:24:18 - DEBUG: [CREATE.rs] Inserting comment.
+2024-06-08 03:24:18 - INFO: [CREATE.rs] Inserting a new comment.
+2024-06-08 03:24:18 - DEBUG: ()
+2024-06-08 03:24:35 - INFO: [MAIN.rs] Parsing runtime args.
+2024-06-08 03:24:35 - INFO: [MAIN.rs] Connecting to the database at sqlite://database/comments.sql
+2024-06-08 03:24:35 - DEBUG: [COMMENTS.rs] Checking that the table 'comments' exists.
+2024-06-08 03:24:35 - DEBUG: [CREATE.rs] Receiving new comment.
+2024-06-08 03:24:35 - DEBUG: [CREATE.rs] Creating a new uuid for the comment.
+2024-06-08 03:24:35 - DEBUG: [CREATE.rs] Creating a new time stamp for the comment.
+2024-06-08 03:24:35 - DEBUG: [CREATE.rs] Sanitizing comment.
+2024-06-08 03:24:35 - DEBUG: [CREATE.rs] Inserting comment.
+2024-06-08 03:24:35 - INFO: [CREATE.rs] Inserting a new comment.
+2024-06-08 03:24:35 - DEBUG: ()
+2024-06-08 03:25:16 - INFO: [MAIN.rs] Parsing runtime args.
+2024-06-08 03:25:16 - INFO: [MAIN.rs] Connecting to the database at sqlite://database/comments.sql
+2024-06-08 03:25:16 - DEBUG: [COMMENTS.rs] Checking that the table 'comments' exists.
+2024-06-08 03:25:16 - DEBUG: [CREATE.rs] Receiving new comment.
+2024-06-08 03:25:16 - DEBUG: [CREATE.rs] Creating a new uuid for the comment.
+2024-06-08 03:25:16 - DEBUG: [CREATE.rs] Creating a new time stamp for the comment.
+2024-06-08 03:25:16 - DEBUG: [CREATE.rs] Sanitizing comment.
+2024-06-08 03:25:16 - DEBUG: [CREATE.rs] Inserting comment.
+2024-06-08 03:25:16 - INFO: [CREATE.rs] Inserting a new comment.
+2024-06-08 03:25:16 - DEBUG: ()
+2024-06-08 03:25:16 - DEBUG: [
+    Comment {
+        id: ece8aee8-ad61-49d5-b98e-270945ab1126,
+        ip_address: "16912011",
+        related_post_id: "none",
+        username: "joshuawintersbrown",
+        comment: "thisisacomment",
+        time_stamp: "systemtimetvsec1717817116tvnsec104029000",
+        visible: true,
+    },
+    Comment {
+        id: fdf76f29-5a7d-48fa-9c7f-0c0a45763305,
+        ip_address: "16912011",
+        related_post_id: "none",
+        username: "joshuawintersbrown",
+        comment: "thisisacomment",
+        time_stamp: "systemtimetvsec1717817075tvnsec27270000",
+        visible: true,
+    },
+    Comment {
+        id: 214201ab-543d-4163-ae1c-48b5ec9585ef,
+        ip_address: "16912011",
+        related_post_id: "none",
+        username: "joshuawintersbrown",
+        comment: "thisisacomment",
+        time_stamp: "systemtimetvsec1717817058tvnsec259516000",
+        visible: true,
+    },
+    Comment {
+        id: 0f8c8f06-c9c5-4d03-9d0c-91a4cf2ff175,
+        ip_address: "16912011",
+        related_post_id: "none",
+        username: "joshuawintersbrown",
+        comment: "thisisacomment",
+        time_stamp: "systemtimetvsec1717816983tvnsec496695000",
+        visible: true,
+    },
+    Comment {
+        id: 17ef5599-caae-427d-a565-851f2023e1a4,
+        ip_address: "16912011",
+        related_post_id: "none",
+        username: "joshuawintersbrown",
+        comment: "thisisacomment",
+        time_stamp: "systemtimetvsec1717816080tvnsec367013000",
+        visible: true,
+    },
+    Comment {
+        id: 97e560fc-c92d-4022-8a98-f4f938663e54,
+        ip_address: "16912011",
+        related_post_id: "none",
+        username: "joshuawintersbrown",
+        comment: "thisisacomment",
+        time_stamp: "systemtimetvsec1717816026tvnsec289094000",
+        visible: true,
+    },
+    Comment {
+        id: 5ff0f5b0-700d-450c-8df3-90f831fceab8,
+        ip_address: "16912011",
+        related_post_id: "none",
+        username: "joshuawintersbrown",
+        comment: "thisisacomment",
+        time_stamp: "systemtimetvsec1717815827tvnsec198084000",
+        visible: true,
+    },
+    Comment {
+        id: f6d57b37-fee8-47e2-8887-29fdee5ed894,
+        ip_address: "16912011",
+        related_post_id: "none",
+        username: "joshuawintersbrown",
+        comment: "thisisacomment",
+        time_stamp: "systemtimetvsec1717815800tvnsec626550000",
+        visible: true,
+    },
+    Comment {
+        id: c34a5d56-f35d-4fd5-9b36-c8d0115978f2,
+        ip_address: "16912011",
+        related_post_id: "none",
+        username: "joshuawintersbrown",
+        comment: "thisisacomment",
+        time_stamp: "systemtimetvsec1717815751tvnsec978605000",
+        visible: true,
+    },
+]

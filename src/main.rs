@@ -1,13 +1,13 @@
-use diesel::SqliteConnection;
-use log::{error, info, warn, trace};
-use diesel::Connection;
-use log4rs;
-use clap::Parser;
-use dotenv::dotenv;
 use std::env;
 
+use database::comment;
+use log::{debug, info, trace};
+use dotenv::dotenv as dotnet;
+use clap::{command, Parser};
+use log4rs;
+
 // Import Modules
-mod api;
+mod database;
 
 #[derive(Parser, Debug)]
 #[command(name = "comments.unorthodoxdev.net")]
@@ -17,29 +17,17 @@ mod api;
 struct Args {
 }
 
-pub fn establish_connection() -> SqliteConnection {
-    dotenv().ok();
-
-    let database_url = env::var("DATABASE_URL").expect("DATABASE_URL must be set");
-    SqliteConnection::establish(&database_url)
-        .unwrap_or_else(|_| panic!("Error connecting to {}", database_url))
-}
-
 fn main() {
     //Configure log4rs
     log4rs::init_file("configurations/log4rs.yaml", Default::default()).unwrap();
 
     trace!("[MAIN.rs] Initializing environment variables.");
-    dotenv().ok(); // load .env
+    dotnet().ok(); // load .env
 
     info!("[MAIN.rs] Parsing runtime args.");
-    let cli = Args::parse();
+    let _cli = Args::parse();
 
-
+    info!("[MAIN.rs] Connecting to the database at sqlite://{}", env::var("DATABASE_URL").unwrap());
     // check if database exists.
-        // create if does not exists.
-
-    // check mode running in, default webserver mode
-        // if webserver mode start webserver.
-            // register routes.
+    comment::check_database();
 }

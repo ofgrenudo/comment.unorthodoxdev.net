@@ -5,6 +5,6 @@ CREATE TABLE comments (
   -- Comment Information
   username TEXT NOT NULL,
   comment TEXT NOT NULL,
-  timestamp TEXT NOT NULL,
-  visible INT NOT NULL DEFAULT FALSE,
+  time_stamp TEXT NOT NULL,
+  visible INT NOT NULL 
 )

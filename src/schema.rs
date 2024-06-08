@@ -2,12 +2,12 @@
 
 diesel::table! {
     comments (id) {
-        id -> Integer,
+        id -> Nullable<Integer>,
         ip_address -> Text,
-        // Comment Information
+        related_post_id -> Nullable<Text>,
         username -> Text,
         comment -> Text,
-        timestamp -> Text,
-        visible -> Bool,
+        time_stamp -> Text,
+        visible -> Integer,
     }
 }

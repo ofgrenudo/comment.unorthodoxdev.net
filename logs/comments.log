@@ -14,3 +14,58 @@
 2024-06-05 20:03:17 - INFO: Args {
     database_path: None,
 }
+2024-06-08 00:47:01 - INFO: [MAIN.rs] Parsing runtime args.
+2024-06-08 01:24:19 - INFO: [MAIN.rs] Parsing runtime args.
+2024-06-08 01:25:04 - DEBUG: database/comments.sql
+2024-06-08 01:25:04 - INFO: [MAIN.rs] Parsing runtime args.
+2024-06-08 01:25:33 - INFO: [MAIN.rs] Parsing runtime args.
+2024-06-08 01:25:33 - DEBUG: database/comments.sql
+2024-06-08 01:33:26 - INFO: [MAIN.rs] Parsing runtime args.
+2024-06-08 01:33:26 - DEBUG: database/comments.sql
+2024-06-08 02:17:32 - INFO: [MAIN.rs] Parsing runtime args.
+2024-06-08 02:17:32 - DEBUG: database/comments.sql
+2024-06-08 02:18:25 - INFO: [MAIN.rs] Parsing runtime args.
+2024-06-08 02:18:25 - DEBUG: database/comments.sql
+2024-06-08 02:20:06 - INFO: [MAIN.rs] Parsing runtime args.
+2024-06-08 02:20:06 - DEBUG: database/comments.sql
+2024-06-08 02:22:49 - INFO: [MAIN.rs] Parsing runtime args.
+2024-06-08 02:22:49 - DEBUG: database/comments.sql
+2024-06-08 02:28:05 - INFO: [MAIN.rs] Parsing runtime args.
+2024-06-08 02:28:05 - DEBUG: database/comments.sql
+2024-06-08 02:28:22 - INFO: [MAIN.rs] Parsing runtime args.
+2024-06-08 02:28:22 - DEBUG: database/comments.sql
+2024-06-08 02:28:22 - DEBUG: 0
+2024-06-08 02:30:33 - INFO: [MAIN.rs] Parsing runtime args.
+2024-06-08 02:30:33 - DEBUG: database/comments.sql
+2024-06-08 02:30:33 - DEBUG: 0
+2024-06-08 02:30:37 - INFO: [MAIN.rs] Parsing runtime args.
+2024-06-08 02:30:37 - DEBUG: database/comments.sql
+2024-06-08 02:41:08 - INFO: [MAIN.rs] Parsing runtime args.
+2024-06-08 02:41:08 - DEBUG: database/comments.sql
+2024-06-08 02:41:08 - DEBUG: 0
+2024-06-08 02:41:10 - INFO: [MAIN.rs] Parsing runtime args.
+2024-06-08 02:41:10 - DEBUG: database/comments.sql
+2024-06-08 02:41:10 - DEBUG: 0
+2024-06-08 02:41:13 - INFO: [MAIN.rs] Parsing runtime args.
+2024-06-08 02:41:13 - DEBUG: database/comments.sql
+2024-06-08 02:41:13 - DEBUG: 0
+2024-06-08 02:52:01 - INFO: [MAIN.rs] Parsing runtime args.
+2024-06-08 02:52:01 - INFO: [MAIN.rs] Connecting to the database at sqlite://database/comments.sql
+2024-06-08 02:52:01 - DEBUG: ()
+2024-06-08 02:52:23 - INFO: [MAIN.rs] Parsing runtime args.
+2024-06-08 02:52:23 - INFO: [MAIN.rs] Connecting to the database at sqlite://database/comments.sql
+2024-06-08 02:53:49 - INFO: [MAIN.rs] Parsing runtime args.
+2024-06-08 02:53:49 - INFO: [MAIN.rs] Connecting to the database at sqlite://database/comments.sql
+2024-06-08 02:54:05 - INFO: [MAIN.rs] Parsing runtime args.
+2024-06-08 02:54:05 - INFO: [MAIN.rs] Connecting to the database at sqlite://database/comments.sql
+2024-06-08 02:54:11 - INFO: [MAIN.rs] Parsing runtime args.
+2024-06-08 02:54:11 - INFO: [MAIN.rs] Connecting to the database at sqlite://database/comments.sql
+2024-06-08 02:54:18 - INFO: [MAIN.rs] Parsing runtime args.
+2024-06-08 02:54:18 - INFO: [MAIN.rs] Connecting to the database at sqlite://database/comments.sql
+2024-06-08 02:54:26 - INFO: [MAIN.rs] Parsing runtime args.
+2024-06-08 02:54:26 - INFO: [MAIN.rs] Connecting to the database at sqlite://database/comments.sql
+2024-06-08 02:54:54 - INFO: [MAIN.rs] Parsing runtime args.
+2024-06-08 02:54:54 - INFO: [MAIN.rs] Connecting to the database at sqlite://database/comments.sql
+2024-06-08 02:55:06 - INFO: [MAIN.rs] Parsing runtime args.
+2024-06-08 02:55:06 - INFO: [MAIN.rs] Connecting to the database at sqlite://database/comments.sql
+2024-06-08 02:55:06 - DEBUG: ()

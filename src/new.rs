@@ -7,6 +7,7 @@ use serde::Deserialize;
 pub struct FormData {
     username: String,
     comment: String,
+    post_url: String,
 }
 
 #[route("/comment/new/", method="POST", method="PUT")]
@@ -23,5 +24,27 @@ pub async fn comment(web::Form(form): web::Form<FormData>, req: HttpRequest) -> 
     debug!("Submitted new comment {:?}", new_comment_result);
 
     debug!("Redirecting to the root /comment/get/latest");
+    web::redirect("/comment/new", "/comment/get/latest")
+}
+
+#[route("/comment/new/post", method="POST", method="PUT")]
+pub async fn comment_on_post(web::Form(form): web::Form<FormData>, req: HttpRequest) -> impl Responder {
+    let default_ip = HeaderValue::from_static("127.0.0.1");
+    let ip_ref = req.headers().get("X-Forwarded-For").unwrap_or(&default_ip);
+    let ip = ip_ref.to_str().unwrap_or("6.6.6.6");
+    
+    let username = form.username;
+    let comment_text = form.comment;  // Renamed from `comment`
+    let post_url = form.post_url;
+
+    debug!(
+        "Received create new comment request for a post with the URL: {}, username: {}, and comment: {}",
+        post_url, username, comment_text
+    );
+
+    let new_comment_result = cmanager::new::comment_on_post(String::from(ip), username, comment_text, post_url);
+    debug!("Submitted new comment {:?}", new_comment_result);
+    debug!("Redirecting to the root /comment/get/latest");
+
     web::redirect("/comment/new", "/comment/get/latest")
 }

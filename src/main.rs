@@ -20,6 +20,7 @@ async fn main() -> std::io::Result<()> {
         .service(get::by_id)
         .service(get::by_username)
         .service(new::comment)
+        .service(new::comment_on_post)
         .service(actix_files::Files::new(
             "/comment/static/",
             Path::new(&format!("./static")),

@@ -26,7 +26,8 @@ pub fn get_all_comments() -> Vec<Comment> {
             username: statement.read::<String, _>("username").unwrap().to_string(),
             comment: statement.read::<String, _>("comment").unwrap().to_string(),
             timestamp: statement.read::<String, _>("timestamp").unwrap(),
-            visible: statement.read::<i64, _>("visible").unwrap(),            
+            visible: statement.read::<i64, _>("visible").unwrap(),     
+            post_url: statement.read::<String, _>("post_url").unwrap().to_string()                  
         });
     }
 
@@ -55,7 +56,8 @@ pub fn get_latest() -> Vec<Comment> {
             username: statement.read::<String, _>("username").unwrap().to_string(),
             comment: statement.read::<String, _>("comment").unwrap().to_string(),
             timestamp: statement.read::<String, _>("timestamp").unwrap(),
-            visible: statement.read::<i64, _>("visible").unwrap(),            
+            visible: statement.read::<i64, _>("visible").unwrap(), 
+            post_url: statement.read::<String, _>("post_url").unwrap_or("null".to_string())           
         });
     }
 
@@ -84,7 +86,8 @@ pub fn get_one_by_id(id: String) -> Vec<Comment> {
             username: statement.read::<String, _>("username").unwrap().to_string(),
             comment: statement.read::<String, _>("comment").unwrap().to_string(),
             timestamp: statement.read::<String, _>("timestamp").unwrap(),
-            visible: statement.read::<i64, _>("visible").unwrap(),            
+            visible: statement.read::<i64, _>("visible").unwrap(),       
+            post_url: statement.read::<String, _>("post_url").unwrap().to_string(),
         });
     }
 
@@ -116,6 +119,7 @@ pub fn get_all_by_ip(ip: String) -> Vec<Comment> {
             comment: statement.read::<String, _>("comment").unwrap().to_string(),
             timestamp: statement.read::<String, _>("timestamp").unwrap(),
             visible: statement.read::<i64, _>("visible").unwrap(),            
+            post_url: statement.read::<String, _>("post_url").unwrap().to_string()           
         });
     }
 
@@ -147,6 +151,7 @@ pub fn get_all_by_username(username: String) -> Vec<Comment> {
             comment: statement.read::<String, _>("comment").unwrap().to_string(),
             timestamp: statement.read::<String, _>("timestamp").unwrap(),
             visible: statement.read::<i64, _>("visible").unwrap(),            
+            post_url: statement.read::<String, _>("post_url").unwrap().to_string()           
         });
     }
 

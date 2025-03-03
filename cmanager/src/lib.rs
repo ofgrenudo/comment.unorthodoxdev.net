@@ -24,6 +24,7 @@ pub struct Comment {
     pub comment: String,
     pub timestamp: String,
     pub visible: i64,
+    pub post_url: String,
 }
 
 #[derive(Debug)]

@@ -50,3 +50,23 @@ pub async fn by_username(path: web::Path<String>) -> HttpResponse {
 
         HttpResponse::Ok().body(content)
 }
+
+#[route("/comment/get/post/{url}", method="GET", method="POST", method="PUT")]
+pub async fn by_post(path: web::Path<String>) -> HttpResponse {
+    let provided_url = path.into_inner();
+    let content = CommentTemplate {comments: cmanager::get::get_all_on_post(provided_url)}
+        .render()
+        .expect("Error rendering index");
+
+        HttpResponse::Ok().body(content)
+}
+
+#[route("/comment/get/post/raw/{url}", method="GET", method="POST", method="PUT")]
+pub async fn by_post_raw(path: web::Path<String>) -> HttpResponse {
+    let provided_url = path.into_inner();
+    let content = cmanager::get::get_all_on_post(provided_url);
+    let json_content = serde_json::to_string(&content).expect("Error serializing content");
+
+    // Return the content as JSON
+    HttpResponse::Ok().body(json_content)
+}

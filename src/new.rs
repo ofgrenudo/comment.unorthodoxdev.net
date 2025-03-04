@@ -11,7 +11,7 @@ pub struct FormData {
     post_url: String,
 }
 
-#[route("/new/", method="POST", method="PUT")]
+#[route("/comment/new/", method="POST", method="PUT")]
 pub async fn comment(web::Form(form): web::Form<FormData>, req: HttpRequest) -> impl Responder {
     // let ip = req.peer_addr().unwrap_or(SocketAddr::new(IpAddr::V4(Ipv4Addr::new(6, 6, 6, 6)), 666)).ip();
     let default_ip = HeaderValue::from_static("127.0.0.1"); // fail point one
@@ -28,7 +28,7 @@ pub async fn comment(web::Form(form): web::Form<FormData>, req: HttpRequest) -> 
     web::redirect("/comment/new", "/comment/get/latest")
 }
 
-#[route("/new/post", method="POST", method="PUT")]
+#[route("/comment/new/post", method="POST", method="PUT")]
 pub async fn comment_on_post(web::Form(form): web::Form<FormData>, req: HttpRequest) -> impl Responder  {
     debug!("{:#?}", form);
     let default_ip = HeaderValue::from_static("127.0.0.1");
@@ -54,7 +54,7 @@ pub async fn comment_on_post(web::Form(form): web::Form<FormData>, req: HttpRequ
         .body("data")
 }
 
-#[route("/debug", method="POST")]
+#[route("/comment/debug", method="POST")]
 pub async fn post_any_data(web::Form(form): web::Form<FormData>, req: HttpRequest) -> impl Responder {
     debug!("{:#?}", form);
     let default_ip = HeaderValue::from_static("127.0.0.1");
@@ -74,5 +74,5 @@ pub async fn post_any_data(web::Form(form): web::Form<FormData>, req: HttpReques
     debug!("Submitted new comment {:?}", new_comment_result);
     debug!("Redirecting to the root /comment/get/latest");
 
-    web::redirect("/new", "/get/latest")
+    web::redirect("/comment/new", "/comment/get/latest")
 }

@@ -1,4 +1,6 @@
 use uuid::Uuid;
+use serde::{Serialize, Serializer};
+use serde::ser::SerializeStruct;
 pub mod new;
 pub mod get;
 
@@ -16,7 +18,7 @@ pub mod get;
 /// The ID and Timestamp are automatically generated. The ID is generated using a UUID V3 format (essentially completly random). The timestamp is in UTC time, cuz we are cool
 /// The username, and comment and IP are user supplied. Typically though, the IP is sourced from the Actix Web Server.
 ///  
-#[derive(Debug)]
+#[derive(Debug)]  // Added Serde derives
 pub struct Comment {
     pub id: Uuid,
     pub ip: String,
@@ -25,6 +27,28 @@ pub struct Comment {
     pub timestamp: String,
     pub visible: i64,
     pub post_url: String,
+}
+
+// Manual Serialize implementation for Comment
+impl Serialize for Comment {
+    fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
+    where
+        S: Serializer,
+    {
+        let mut state = serializer.serialize_struct("Comment", 7)?;
+        
+        // Manually serialize each field
+        state.serialize_field("id", &self.id.to_string())?;  // Convert UUID to string
+        state.serialize_field("ip", &self.ip)?;
+        state.serialize_field("username", &self.username)?;
+        state.serialize_field("comment", &self.comment)?;
+        state.serialize_field("timestamp", &self.timestamp)?;
+        state.serialize_field("visible", &self.visible)?;
+        state.serialize_field("post_url", &self.post_url)?;
+        
+        // Finalize the serialization
+        state.end()
+    }
 }
 
 #[derive(Debug)]

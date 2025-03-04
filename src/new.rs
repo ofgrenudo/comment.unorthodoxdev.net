@@ -49,9 +49,6 @@ pub async fn comment_on_post(web::Form(form): web::Form<FormData>, req: HttpRequ
     debug!("Redirecting to the root /comment/get/latest");
     // Return an acknowledgment response
     HttpResponse::Ok()
-        .content_type(ContentType::plaintext())
-        .insert_header(("X-Hdr", "sample"))
-        .body("data")
 }
 
 #[route("/comment/debug", method="POST")]

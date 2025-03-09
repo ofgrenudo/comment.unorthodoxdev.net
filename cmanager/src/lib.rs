@@ -58,6 +58,12 @@ pub struct CommentError {
     comment: Comment,
 }
 
+#[derive(Debug)]
+pub enum DatabaseError {
+    InvalidInput,
+    DatabaseError,
+}
+
 pub enum CommentResult<Comment, CommentError> {
     Ok(Comment),
     Err(CommentError),

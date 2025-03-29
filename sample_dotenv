@@ -1,0 +1,1 @@
+DATABASE_URL=mysql://user@address:3306/table_name?
